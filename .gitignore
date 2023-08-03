@@ -233,5 +233,5 @@ $RECYCLE.BIN/
 *.msp
 
 bin
-
 obj
+.vs
