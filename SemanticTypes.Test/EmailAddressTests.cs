@@ -1,64 +1,60 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SemanticTypes.SemanticTypeExamples;
+using Xunit;
 
-namespace SemanticTypes.Test
+namespace SemanticTypes.Test;
+
+
+public class EmailAddressTests
 {
-    [TestClass]
-    public class EmailAddressTests
-    {
-        [TestMethod]
-        [ExpectedException(typeof(System.ArgumentException))]
-        public void SetToNull_Exception()
+    [Fact]
+    public void SetToNull_Exception()
+        => Assert.Throws<ArgumentException>(() =>
         {
             var emailAddress = new EmailAddress(null);
-        }
+        });
 
-        [TestMethod]
-        [ExpectedException(typeof(System.ArgumentException))]
-        public void SetToInvalid_Exception()
-        {
-            var emailAddress = new EmailAddress("Invalid email address");
-        }
+    [Fact]
+    public void SetToInvalid_Exception()
+        => Assert.Throws<ArgumentException>(() =>
+            {
+                var emailAddress = new EmailAddress("Invalid email address");
+            });
 
-        [TestMethod]
-        public void SetToValid_NoException()
-        {
-            var emailAddress = new EmailAddress("test12@test.com.au");
-            Assert.AreEqual("test12@test.com.au", emailAddress.Value);
-        }
+    [Fact]
+    public void SetToValid_NoException()
+    {
+        var emailAddress = new EmailAddress("test12@test.com.au");
+        Assert.Equal("test12@test.com.au", emailAddress.Value);
+    }
 
-        [TestMethod]
-        public void Test_Implicit()
-        {
-            EmailAddress emailAddress = "example@contoso.com";
-            Assert.AreEqual("example@contoso.com", emailAddress.Value);
-        }
+    [Fact]
+    public void Test_Implicit()
+    {
+        EmailAddress emailAddress = "example@contoso.com";
+        Assert.Equal("example@contoso.com", emailAddress.Value);
+    }
 
-        [TestMethod]
-        public void Test_Explicit()
-        {
-            EmailAddress emailAddress = new EmailAddress("example@contoso.com");
+    [Fact]
+    public void Test_Explicit()
+    {
+        EmailAddress emailAddress = new EmailAddress("example@contoso.com");
 
-            string sAddress = (string)emailAddress;
-            Assert.AreEqual("example@contoso.com", sAddress);
-        }
+        string sAddress = (string)emailAddress;
+        Assert.Equal("example@contoso.com", sAddress);
+    }
 
-        [TestMethod]
-        public void SetToNull()
-        {
-            EmailAddress emailAddress = null;
-            Assert.AreEqual(emailAddress, null);
-        }
+    [Fact]
+    public void SetToNull()
+    {
+        EmailAddress emailAddress = null;
+        Assert.Null(emailAddress);
+    }
 
-        [TestMethod]
-        [ExpectedException(typeof(System.ArgumentException))]
-        public void SetToInvalidImplicit_Exception()
+    [Fact]
+    public void SetToInvalidImplicit_Exception()
+        => Assert.Throws<ArgumentException>(() =>
         {
             EmailAddress emailAddress = "Invalid email address";
-        }
-    }
+        });
 }

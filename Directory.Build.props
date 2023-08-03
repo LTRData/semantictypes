@@ -1,0 +1,36 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFrameworks>net35;net40;netstandard2.0;net6.0</TargetFrameworks>
+    <LangVersion>Latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <Copyright>2014 - 2023, LTRData, mperdeck</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DebugType>portable</DebugType>
+    <PackageProjectUrl>https://github.com/LTRData/SemanticTypes</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+    <PackageOutputPath>$(LocalNuGetPath)</PackageOutputPath>
+    <PackageId>LTRData.$(MSBuildProjectName)</PackageId>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <Company>LTR Data</Company>
+    <Product>LTRData.$(MSBuildProjectName)</Product>
+    <ProductName>LTRData.$(MSBuildProjectName)</ProductName>
+    <Authors>Olof Lagerkvist, mperdeck</Authors>
+    <PackageVersion>2.0.0</PackageVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Link="README.md" Pack="true" PackagePath="\" />
+    <None Include="..\LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  
+</Project>

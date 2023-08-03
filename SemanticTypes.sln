@@ -1,13 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticTypes", "SemanticTypes\SemanticTypes.csproj", "{A036BBF1-9CB8-43EF-AE5A-BA03379F6895}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticTypes", "SemanticTypes\SemanticTypes.csproj", "{A036BBF1-9CB8-43EF-AE5A-BA03379F6895}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticTypes.Test", "SemanticTypes.Test\SemanticTypes.Test.csproj", "{A808B45A-1E25-4923-A5A4-91D6CCC0925E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticTypes.Examples", "SemanticTypes.Examples\SemanticTypes.Examples.csproj", "{C66B0B41-FCC8-40DD-9F36-C3F15777023A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticTypes.TypeSystem.Physics", "SemanticTypes.TypeSystem.Physics\SemanticTypes.TypeSystem.Physics.csproj", "{98A497A7-FCB9-48D7-9FC7-AEB0D34DE711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticTypes.TypeSystem.Physics", "SemanticTypes.TypeSystem.Physics\SemanticTypes.TypeSystem.Physics.csproj", "{98A497A7-FCB9-48D7-9FC7-AEB0D34DE711}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF99CAEF-5E6F-4E82-A868-EE354FD59A46}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,5 +44,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75FE6E53-6070-4DDF-BA70-E9C9868D6210}
 	EndGlobalSection
 EndGlobal

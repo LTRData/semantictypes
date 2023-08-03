@@ -1,60 +1,57 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SemanticTypes.SemanticTypeQualifiedByValueExamples;
+﻿using SemanticTypes.SemanticTypeQualifiedByValueExamples;
+using Xunit;
 
-namespace SemanticTypes.Test
+namespace SemanticTypes.Test;
+
+public class AmountTests
 {
-    [TestClass]
-    public class AmountTests
+    [Fact]
+    public void AllAmountTests()
     {
-        [TestMethod]
-        public void AllAmountTests()
-        {
-            Amount usd5Amount = new Amount(5, "USD");
-            Amount usd5Amount2 = new Amount(5, "USD");
-            Amount usd10Amount = new Amount(10, "USD");
-            Amount eur5Amount = new Amount(5, "EUR");
-            Amount eur2Amount = new Amount(2, "EUR");
-            Amount eur3Amount = new Amount(3, "EUR");
-            Amount nullAmount = null;
+        Amount usd5Amount = new Amount(5, "USD");
+        Amount usd5Amount2 = new Amount(5, "USD");
+        Amount usd10Amount = new Amount(10, "USD");
+        Amount eur5Amount = new Amount(5, "EUR");
+        Amount eur2Amount = new Amount(2, "EUR");
+        Amount eur3Amount = new Amount(3, "EUR");
+        Amount nullAmount = null;
 
-            Assert.AreEqual(eur5Amount, eur2Amount + eur3Amount);
-            Assert.AreEqual(eur2Amount, eur5Amount - eur3Amount);
-            Assert.AreEqual(usd5Amount, usd5Amount2);
-            Assert.AreEqual(usd5Amount, usd10Amount / 2);
-            Assert.AreEqual(usd10Amount, usd5Amount * 2);
-            Assert.AreEqual(usd10Amount, 2 * usd5Amount);
-            Assert.AreEqual(-1 * usd5Amount, -usd5Amount2);
+        Assert.Equal(eur5Amount, eur2Amount + eur3Amount);
+        Assert.Equal(eur2Amount, eur5Amount - eur3Amount);
+        Assert.Equal(usd5Amount, usd5Amount2);
+        Assert.Equal(usd5Amount, usd10Amount / 2);
+        Assert.Equal(usd10Amount, usd5Amount * 2);
+        Assert.Equal(usd10Amount, 2 * usd5Amount);
+        Assert.Equal(-1 * usd5Amount, -usd5Amount2);
 
-            Assert.IsNull(eur2Amount + nullAmount);
-            Assert.IsNull(nullAmount + eur2Amount);
-            Assert.IsNull(nullAmount + nullAmount);
+        Assert.Null(eur2Amount + nullAmount);
+        Assert.Null(nullAmount + eur2Amount);
+        Assert.Null(nullAmount + nullAmount);
 
-            // Amounts with different currencies
-            Assert.IsNull(eur2Amount + usd5Amount);
+        // Amounts with different currencies
+        Assert.Null(eur2Amount + usd5Amount);
 
-            // -----------------------------------------------
+        // -----------------------------------------------
 
-            Assert.IsTrue(eur2Amount < eur3Amount);
-            Assert.IsFalse(eur2Amount > eur3Amount);
-            Assert.IsTrue(eur2Amount <= eur3Amount);
-            Assert.IsFalse(eur2Amount >= eur3Amount);
+        Assert.True(eur2Amount < eur3Amount);
+        Assert.False(eur2Amount > eur3Amount);
+        Assert.True(eur2Amount <= eur3Amount);
+        Assert.False(eur2Amount >= eur3Amount);
 
-            Assert.IsTrue(eur3Amount > eur2Amount);
-            Assert.IsFalse(eur3Amount < eur2Amount);
-            Assert.IsTrue(eur3Amount >= eur2Amount);
-            Assert.IsFalse(eur3Amount <= eur2Amount);
+        Assert.True(eur3Amount > eur2Amount);
+        Assert.False(eur3Amount < eur2Amount);
+        Assert.True(eur3Amount >= eur2Amount);
+        Assert.False(eur3Amount <= eur2Amount);
 
-            Assert.IsTrue(usd5Amount == usd5Amount2);
-            Assert.IsFalse(eur3Amount == eur2Amount);
-            Assert.IsTrue(eur3Amount != eur2Amount);
-            Assert.IsFalse(usd5Amount != usd5Amount2);
+        Assert.True(usd5Amount == usd5Amount2);
+        Assert.False(eur3Amount == eur2Amount);
+        Assert.True(eur3Amount != eur2Amount);
+        Assert.False(usd5Amount != usd5Amount2);
 
-            Assert.IsFalse(eur5Amount == usd5Amount);
-            Assert.IsTrue(eur5Amount != usd5Amount);
+        Assert.False(eur5Amount == usd5Amount);
+        Assert.True(eur5Amount != usd5Amount);
 
 
 
-        }
     }
 }

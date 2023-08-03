@@ -1,63 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SemanticTypes.SemanticTypeQualifiedByTypeExamples;
+﻿using SemanticTypes.SemanticTypeQualifiedByTypeExamples;
+using Xunit;
 
-namespace SemanticTypes.Test
+namespace SemanticTypes.Test;
+
+
+public class IdTests
 {
-    [TestClass]
-    public class IdTests
+    private class Book
     {
-        private class Book
+        public Id<Book> BookId { get; set; }
+        public string Title { get; set; }
+        public Id<Author> AuthorId { get; set; }
+    }
+
+    private class Author
+    {
+        public Id<Author> AuthorId { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+    }
+
+    private static void F(Id<Book> _)
+    {
+    }
+
+    [Fact]
+    public void IdGreaterThan0_Succeeds()
+    {
+        var author = new Author
         {
-            public Id<Book> BookId { get; set; }
-            public string Title { get; set; }
-            public Id<Author> AuthorId { get; set; }
-        }
+            AuthorId = new Id<Author>(1),
+            Name = "Leo Tolstoy"
+        };
 
-        private class Author
+        var book = new Book
         {
-            public Id<Author> AuthorId { get; set; }
-            public string Name { get; set; }
-            public string Address { get; set; }
-        }
+            AuthorId = author.AuthorId,
+            BookId = new Id<Book>(2),
+            Title = "War And Peace"
+        };
 
-        private void f(Id<Book> bookId)
-        {
-        }
+        Assert.Equal(2, book.BookId.Value);
 
-        [TestMethod]
-        public void IdGreaterThan0_Succeeds()
-        {
-            var author = new Author
-            {
-                AuthorId = new Id<Author>(1),
-                Name = "Leo Tolstoy"
-            };
+        // Doesn't compile
+        // book.BookId = 5;
 
-            var book = new Book
-            {
-                AuthorId = author.AuthorId,
-                BookId = new Id<Book>(2),
-                Title = "War And Peace"
-            };
+        // Doesn't compile
+        // f(author.AuthorId);
 
-            Assert.AreEqual(2, book.BookId.Value);
+        // Doesn't compile
+        // f(5);
 
-            // Doesn't compile
-            // book.BookId = 5;
-
-            // Doesn't compile
-            // f(author.AuthorId);
-
-            // Doesn't compile
-            // f(5);
-
-            // Compiles
-            f(book.BookId);
-        }
+        // Compiles
+        F(book.BookId);
     }
 }

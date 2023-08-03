@@ -1,0 +1,2 @@
+For license details, please see original repository at:
+https://github.com/mperdeck/semantictypes

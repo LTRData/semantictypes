@@ -28,7 +28,7 @@ Installation
 
 Install via NuGet:
 
-```PM> Install-Package SemanticTypes```
+```PM> Install-Package LTRData.SemanticTypes```
 
 Example
 =======
