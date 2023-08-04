@@ -13,15 +13,7 @@ public class Volume : SemanticDoubleType<Volume>
     /// </param>
     public Volume(double value) : base(value) { }
 
-    public static Area operator /(Volume b, Distance c)
-    {
-        if ((b == null) || (c == null)) { return null; }
-        return new Area(b.Value / c.Value);
-    }
+    public static Area operator /(Volume b, Distance c) => (b == null) || (c == null) ? null : new Area(b.Value / c.Value);
 
-    public static Distance operator /(Volume b, Area c)
-    {
-        if ((b == null) || (c == null)) { return null; }
-        return new Distance(b.Value / c.Value);
-    }
+    public static Distance operator /(Volume b, Area c) => (b == null) || (c == null) ? null : new Distance(b.Value / c.Value);
 }

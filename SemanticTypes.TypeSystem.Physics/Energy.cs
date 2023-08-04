@@ -27,10 +27,7 @@ public class Energy : SemanticDoubleType<Energy>
     /// Energy in meters
     /// </param>
     /// <returns></returns>
-    public static Energy FromKiloJoules(double value)
-    {
-        return new Energy(value);
-    }
+    public static Energy FromKiloJoules(double value) => new(value);
 
     /// <summary>
     /// Creates a new distance
@@ -39,10 +36,7 @@ public class Energy : SemanticDoubleType<Energy>
     /// Energy in MegaJoules
     /// </param>
     /// <returns></returns>
-    public static Energy FromMegaJoules(double value)
-    {
-        return new Energy(value * MegaJoulesToKiloJoules);
-    }
+    public static Energy FromMegaJoules(double value) => new(value * MegaJoulesToKiloJoules);
 
     /// <summary>
     /// Returns the energy in KiloJoules.

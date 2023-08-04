@@ -21,9 +21,5 @@ public abstract class SemanticType<T> :
     {
     }
 
-    public int CompareTo(SemanticType<T> other)
-    {
-        if (other == null) { return 1; }
-        return this.Value.CompareTo(other.Value);
-    }
+    public int CompareTo(SemanticType<T> other) => other == null ? 1 : Value.CompareTo(other.Value);
 }

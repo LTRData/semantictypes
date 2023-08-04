@@ -31,10 +31,7 @@ public class Distance : SemanticDoubleType<Distance>
     /// Distance in meters
     /// </param>
     /// <returns></returns>
-    public static Distance FromMeters(double value)
-    {
-        return new Distance(value);
-    }
+    public static Distance FromMeters(double value) => new(value);
 
     /// <summary>
     /// Returns the distance in meters.
@@ -52,10 +49,7 @@ public class Distance : SemanticDoubleType<Distance>
     /// Distance in miles
     /// </param>
     /// <returns></returns>
-    public static Distance FromMiles(double value)
-    {
-        return new Distance(value * MilesToMeters);
-    }
+    public static Distance FromMiles(double value) => new(value * MilesToMeters);
 
     /// <summary>
     /// Returns the distance in miles.
@@ -73,10 +67,7 @@ public class Distance : SemanticDoubleType<Distance>
     /// Distance in feet
     /// </param>
     /// <returns></returns>
-    public static Distance FromFeet(double value)
-    {
-        return new Distance(value * FeetToMeters);
-    }
+    public static Distance FromFeet(double value) => new(value * FeetToMeters);
 
     /// <summary>
     /// Returns the distance in feet.
@@ -94,10 +85,7 @@ public class Distance : SemanticDoubleType<Distance>
     /// Distance in inches
     /// </param>
     /// <returns></returns>
-    public static Distance FromInches(double value)
-    {
-        return new Distance(value * InchesToMeters);
-    }
+    public static Distance FromInches(double value) => new(value * InchesToMeters);
 
     /// <summary>
     /// Returns the distance in inches.
@@ -112,10 +100,7 @@ public class Distance : SemanticDoubleType<Distance>
     /// Creates a new distance, based on combination of feet and inches
     /// </summary>
     /// <returns></returns>
-    public static Distance FromImperial(double feet, double inches)
-    {
-        return FromInches((12 * feet) + inches);
-    }
+    public static Distance FromImperial(double feet, double inches) => FromInches((12 * feet) + inches);
 
     /// <summary>
     /// Returns the distance in a combination of feet and inches.
@@ -128,10 +113,6 @@ public class Distance : SemanticDoubleType<Distance>
         inches = totalInches % 12;
     }
 
-    public static Area operator *(Distance b, Distance c)
-    {
-        if ((b == null) || (c == null)) { return null; }
-        return new Area(b.Value * c.Value);
-    }
+    public static Area operator *(Distance b, Distance c) => (b == null) || (c == null) ? null : new Area(b.Value * c.Value);
 
 }

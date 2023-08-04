@@ -38,46 +38,31 @@ public abstract class SemanticTypeBase<T> : IEquatable<SemanticTypeBase<T>>, IVa
 
     protected SemanticTypeBase(Func<T, bool> isValidLambda, T value)
     {
-        if ((Object)value == null)
+        if ((object)value == null)
         {
-            throw new ArgumentException(string.Format("Trying to use null as the value of a {0}", this.GetType()));
+            throw new ArgumentException(string.Format("Trying to use null as the value of a {0}", GetType()));
         }
 
         if ((isValidLambda != null) && !isValidLambda(value))
         {
-            throw new ArgumentException(string.Format("Trying to set a {0} to {1} which is invalid", this.GetType(), value));
+            throw new ArgumentException(string.Format("Trying to set a {0} to {1} which is invalid", GetType(), value));
         }
 
         Value = value;
     }
 
-    public override bool Equals(Object obj)
-    {
+    public override bool Equals(object obj) =>
         //Check for null and compare run-time types. 
-        if (obj == null || obj.GetType() != this.GetType())
-        {
-            return false;
-        }
+        obj != null && obj.GetType() == GetType() && Value.Equals(((SemanticTypeBase<T>)obj).Value);
 
-        return (Value.Equals(((SemanticTypeBase<T>)obj).Value));
-    }
+    public override int GetHashCode() => Value.GetHashCode();
 
-    public override int GetHashCode()
-    {
-        return Value.GetHashCode();
-    }
-
-    public virtual bool Equals(SemanticTypeBase<T> other)
-    {
-        if (other == null) { return false; }
-
-        return (Value.Equals(other.Value));
-    }
+    public virtual bool Equals(SemanticTypeBase<T> other) => other != null && Value.Equals(other.Value);
 
     public static bool operator ==(SemanticTypeBase<T> a, SemanticTypeBase<T> b)
     {
         // If both are null, or both are same instance, return true.
-        if (System.Object.ReferenceEquals(a, b))
+        if (ReferenceEquals(a, b))
         {
             return true;
         }
@@ -93,29 +78,13 @@ public abstract class SemanticTypeBase<T> : IEquatable<SemanticTypeBase<T>>, IVa
         return a.Equals(b);
     }
 
-    public static bool operator !=(SemanticTypeBase<T> a, SemanticTypeBase<T> b)
-    {
-        return !(a == b);
-    }
+    public static bool operator !=(SemanticTypeBase<T> a, SemanticTypeBase<T> b) => !(a == b);
 
-    protected static bool EitherNull(SemanticTypeBase<T> a, SemanticTypeBase<T> b)
-    {
-        if (((object)a == null) || ((object)b == null))
-        {
-            return true;
-        }
+    protected static bool EitherNull(SemanticTypeBase<T> a, SemanticTypeBase<T> b) => (a is null) || (b is null);
 
-        return false;
-    }
-    public override string ToString()
-    {
-        return this.Value.ToString();
-    }
+    public override string ToString() => Value.ToString();
 
-    public XmlSchema GetSchema()
-    {
-        return null;
-    }
+    public XmlSchema GetSchema() => null;
 
     public void ReadXml(XmlReader reader)
     {
@@ -125,19 +94,19 @@ public abstract class SemanticTypeBase<T> : IEquatable<SemanticTypeBase<T>>, IVa
             var buffer = Convert.FromBase64String(reader.ReadElementContentAsString());
             Value = (T)(object)buffer;
         }
-        else if (typeof(T) == typeof(UInt16)
-             || typeof(T) == typeof(Int16)
+        else if (typeof(T) == typeof(ushort)
+             || typeof(T) == typeof(short)
             || typeof(T) == typeof(int)
             || typeof(T) == typeof(byte)
             || typeof(T) == typeof(sbyte))
         {
             Value = (T)(object)reader.ReadElementContentAsInt();
         }
-        else if (typeof(T) == typeof(UInt32))
+        else if (typeof(T) == typeof(uint))
         {
-            Value = (T)(object)(UInt32)reader.ReadElementContentAsLong();
+            Value = (T)(object)(uint)reader.ReadElementContentAsLong();
         }
-        else if (typeof(T) == typeof(Int64))
+        else if (typeof(T) == typeof(long))
         {
             Value = (T)(object)reader.ReadElementContentAsLong();
         }
@@ -155,19 +124,19 @@ public abstract class SemanticTypeBase<T> : IEquatable<SemanticTypeBase<T>>, IVa
             var buffer = (byte[])(object)Value;
             writer.WriteBase64(buffer, 0, buffer.Length);
         }
-        else if (typeof(T) == typeof(UInt16)
-             || typeof(T) == typeof(Int16)
+        else if (typeof(T) == typeof(ushort)
+             || typeof(T) == typeof(short)
             || typeof(T) == typeof(int)
             || typeof(T) == typeof(byte)
             || typeof(T) == typeof(sbyte))
         {
             writer.WriteValue((int)(object)Value);
         }
-        else if (typeof(T) == typeof(UInt32))
+        else if (typeof(T) == typeof(uint))
         {
-            writer.WriteValue((long)(UInt32)(object)Value);
+            writer.WriteValue((long)(uint)(object)Value);
         }
-        else if (typeof(T) == typeof(Int64))
+        else if (typeof(T) == typeof(long))
         {
             writer.WriteValue((long)(object)Value);
         }

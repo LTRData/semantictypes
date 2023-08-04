@@ -19,71 +19,31 @@ public class SemanticDoubleType<Q> : SemanticType<double>
     // -----------------------------------------------------------------
     // Binary operator 
 
-    public static Q operator +(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c)
-    {
-        if (EitherNull(b, c)) { return null; }
-        return CreateQ(b.Value + c.Value);
-    }
+    public static Q operator +(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c) => EitherNull(b, c) ? null : CreateQ(b.Value + c.Value);
 
-    public static Q operator -(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c)
-    {
-        if (EitherNull(b, c)) { return null; }
-        return CreateQ(b.Value - c.Value);
-    }
+    public static Q operator -(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c) => EitherNull(b, c) ? null : CreateQ(b.Value - c.Value);
 
-    public static Q operator *(double b, SemanticDoubleType<Q> c)
-    {
-        if (c == null) { return null; }
-        return CreateQ(b * c.Value);
-    }
+    public static Q operator *(double b, SemanticDoubleType<Q> c) => c == null ? null : CreateQ(b * c.Value);
 
-    public static Q operator *(SemanticDoubleType<Q> c, double b)
-    {
-        if (c == null) { return null; }
-        return CreateQ(b * c.Value);
-    }
+    public static Q operator *(SemanticDoubleType<Q> c, double b) => c == null ? null : CreateQ(b * c.Value);
 
-    public static Q operator /(SemanticDoubleType<Q> c, double b)
-    {
-        if (c == null) { return null; }
-        return CreateQ(c.Value / b);
-    }
+    public static Q operator /(SemanticDoubleType<Q> c, double b) => c == null ? null : CreateQ(c.Value / b);
 
     // -----------------------------------------------------------------
     // Unary operator 
 
-    public static Q operator -(SemanticDoubleType<Q> c)
-    {
-        if (c == null) { return null; }
-        return CreateQ(-1 * c.Value);
-    }
+    public static Q operator -(SemanticDoubleType<Q> c) => c == null ? null : CreateQ(-1 * c.Value);
 
     // -----------------------------------------------------------------
     // Comparisons
 
-    public static bool operator <(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c)
-    {
-        if (EitherNull(b, c)) { return false; }
-        return (b.Value < c.Value);
-    }
+    public static bool operator <(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c) => !EitherNull(b, c) && b.Value < c.Value;
 
-    public static bool operator <=(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c)
-    {
-        if (EitherNull(b, c)) { return false; }
-        return (b.Value <= c.Value);
-    }
+    public static bool operator <=(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c) => !EitherNull(b, c) && b.Value <= c.Value;
 
-    public static bool operator >(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c)
-    {
-        if (EitherNull(b, c)) { return false; }
-        return (b.Value > c.Value);
-    }
+    public static bool operator >(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c) => !EitherNull(b, c) && b.Value > c.Value;
 
-    public static bool operator >=(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c)
-    {
-        if (EitherNull(b, c)) { return false; }
-        return (b.Value >= c.Value);
-    }
+    public static bool operator >=(SemanticDoubleType<Q> b, SemanticDoubleType<Q> c) => !EitherNull(b, c) && b.Value >= c.Value;
 
     private static Q CreateQ(double value)
     {

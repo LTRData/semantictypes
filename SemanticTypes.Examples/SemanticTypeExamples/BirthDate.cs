@@ -18,14 +18,8 @@ public class BirthDate : SemanticType<DateTime>
 
     public BirthDate(DateTime birthDate) : base(IsValid, birthDate) { }
 
-    public static explicit operator DateTime(BirthDate value)
-    {
-        return value.Value;
-    }
+    public static explicit operator DateTime(BirthDate value) => value.Value;
 
-    public static implicit operator BirthDate(DateTime value)
-    {
-        return new BirthDate(value);
-    }
+    public static implicit operator BirthDate(DateTime value) => new(value);
 
 }

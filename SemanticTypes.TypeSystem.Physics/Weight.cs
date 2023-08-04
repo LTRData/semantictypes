@@ -27,10 +27,7 @@ public class Weight : SemanticDoubleType<Weight>
     /// Weight in kilograms
     /// </param>
     /// <returns></returns>
-    public static Weight FromKiloGrams(double value)
-    {
-        return new Weight(value);
-    }
+    public static Weight FromKiloGrams(double value) => new(value);
 
     /// <summary>
     /// Returns the weight in KiloGrams.
@@ -51,10 +48,7 @@ public class Weight : SemanticDoubleType<Weight>
     /// Weight in pounds (British, US)
     /// </param>
     /// <returns></returns>
-    public static Weight FromPounds(double value)
-    {
-        return new Weight(value * PoundsToKiloGrams);
-    }
+    public static Weight FromPounds(double value) => new(value * PoundsToKiloGrams);
 
     /// <summary>
     /// Returns the weight in pounds (British, US)
@@ -69,10 +63,7 @@ public class Weight : SemanticDoubleType<Weight>
     /// Creates a new weight, based on combination of stones and pounds
     /// </summary>
     /// <returns></returns>
-    public static Weight FromImperial(double stones, double pounds)
-    {
-        return FromPounds((StonesToPounds * stones) + pounds);
-    }
+    public static Weight FromImperial(double stones, double pounds) => FromPounds((StonesToPounds * stones) + pounds);
 
     /// <summary>
     /// Returns the weight in a combination of stones and pounds

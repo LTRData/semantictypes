@@ -38,41 +38,29 @@ public class SemanticTypeQualifiedByValue<T, Q, S> : IHasQualifyingValue<T, Q>, 
         QualifyingValue = qualifyingValue;
     }
 
-    public override bool Equals(Object obj)
+    public override bool Equals(object obj)
     {
         //Check for null and compare run-time types. 
-        if ((obj == null) || (obj is not S))
-        {
-            return false;
-        }
-
-        return ((Value.Equals(((S)obj).Value)) && 
-                (QualifyingValue.Equals(((S)obj).QualifyingValue)));
+        return obj != null && obj is S
+&& Value.Equals(((S)obj).Value) &&
+                QualifyingValue.Equals(((S)obj).QualifyingValue);
     }
 
-    public override int GetHashCode()
-    {
-        return Value.GetHashCode() + QualifyingValue.GetHashCode();
-    }
+    public override int GetHashCode() => Value.GetHashCode() + QualifyingValue.GetHashCode();
 
-    public bool Equals(S other)
-    {
-        if (other == null) { return false; }
-        
-        return (Value.Equals(other.Value) && QualifyingValue.Equals(other.QualifyingValue));
-    }
+    public bool Equals(S other) => other != null && Value.Equals(other.Value) && QualifyingValue.Equals(other.QualifyingValue);
 
     public static bool operator ==(SemanticTypeQualifiedByValue<T, Q, S> a, SemanticTypeQualifiedByValue<T, Q, S> b)
     {
         // If both are null, or both are same instance, return true.
-        if (System.Object.ReferenceEquals(a, b))
+        if (ReferenceEquals(a, b))
         {
             return true;
         }
 
         // If one is null, but not both, return false.
         // Have to cast to object, otherwise you recursively call this == operator.
-        if (((object)a == null) || ((object)b == null))
+        if ((a is null) || (b is null))
         {
             return false;
         }
@@ -81,10 +69,7 @@ public class SemanticTypeQualifiedByValue<T, Q, S> : IHasQualifyingValue<T, Q>, 
         return a.Equals(b);
     }
 
-    public static bool operator !=(SemanticTypeQualifiedByValue<T, Q, S> a, SemanticTypeQualifiedByValue<T, Q, S> b)
-    {
-        return !(a == b);
-    }
+    public static bool operator !=(SemanticTypeQualifiedByValue<T, Q, S> a, SemanticTypeQualifiedByValue<T, Q, S> b) => !(a == b);
 
     /// <summary>
     /// When comparing two items, and the comparison is not == or != but for example >=
@@ -106,7 +91,7 @@ public class SemanticTypeQualifiedByValue<T, Q, S> : IHasQualifyingValue<T, Q>, 
     /// <returns></returns>
     protected static bool EitherNullOrDifferentQualifyingValue(SemanticTypeQualifiedByValue<T, Q, S> a, SemanticTypeQualifiedByValue<T, Q, S> b)
     {
-        if (((object)a == null) || ((object)b == null))
+        if ((a is null) || (b is null))
         {
             return true;
         }

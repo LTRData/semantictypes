@@ -14,12 +14,7 @@ public class SemanticTypeTests
         {
             if (obj == null) return 1;
 
-            if (obj is not CompareTest1)
-            {
-                throw new ArgumentException("Object is not a CompareTest1");
-            }
-
-            return (MyValue - ((CompareTest1)obj).MyValue);
+            return obj is not CompareTest1 ? throw new ArgumentException("Object is not a CompareTest1") : MyValue - ((CompareTest1)obj).MyValue;
         }
     }
 
@@ -36,12 +31,7 @@ public class SemanticTypeTests
         {
             if (obj == null) return 1;
 
-            if (!(obj is not null))
-            {
-                throw new ArgumentException("Object is not a CompareTest2");
-            }
-
-            return (MyValue - ((CompareTest2)obj).MyValue);
+            return !(obj is not null) ? throw new ArgumentException("Object is not a CompareTest2") : MyValue - ((CompareTest2)obj).MyValue;
         }
     }
 

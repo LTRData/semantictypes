@@ -31,12 +31,12 @@ public class PhysicsTests
         Assert.True(distance2m == distance6m / 3);
         Assert.True(distance2m == -1* (distance4m - distance6m));
 
-        Distance d = (distance4m + distance6m);
+        Distance d = distance4m + distance6m;
 
         Assert.True(distance6m == distance4m + distance2m);
         Assert.True(6 == (distance4m + distance2m).Meters);
 
-        Distance distanceMinus2m = (distance4m - distance6m);
+        Distance distanceMinus2m = distance4m - distance6m;
         Assert.True(distanceMinus2m.Meters == -2);
         Assert.True(distance2m == distance6m - distance4m);
         Assert.True(distance8m2.Value == 8);
